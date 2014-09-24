@@ -26,7 +26,7 @@ public class Main extends Application {
 	static Button btn;
 	public void start(Stage stage) {
 		
-		
+		//Esta parte lo unico que hace es una ventanita simple con un boton
 		lbl = new Label("Escoge el archivo apretando el boton");
 		btn = new Button("ClickMe");
 		btn.setAlignment(Pos.CENTER);
@@ -60,6 +60,9 @@ public class Main extends Application {
 	
 	public void Button1Pressed()
 	{
+		//al apretar el boton te vienes para aca dnde buscas el archivo con Dialog
+		//Aqui se revisa el titulo del xml para saber con que estamos tratando y actuar acorde
+		//Diagram hace los diagramas de Usercases
 		file = chooser.showOpenDialog(stage);
 		XMLCompiler compiler = new XMLCompiler();
 		if(compiler.root(file).equals("UseCaseDiagram"))
@@ -75,6 +78,12 @@ public class Main extends Application {
 		}
 		else if(compiler.root(file).equals("ClassDiagram"))
 		{
+			List<Class> Classes = compiler.getClasses(file);
+			ClassDiagram cd = new ClassDiagram(Classes);
+			String path = file.getAbsolutePath();
+			path = path.replace(".xml", ".png");
+			cd.SaveIamge(path);
+			
 			
 		}
 		

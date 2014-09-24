@@ -3,3 +3,4 @@ Errores:
 Error2: El archivo .xml tiene un error en el nodo primario.
 Error3: el type de algun actor esta mal escrito.
 Error4: el type de alguna conexion esta mal escrita.
+Error5: visibility mal declarado en el xml

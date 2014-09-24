@@ -1,0 +1,7 @@
+Readme
+
+El programa necesita de Java 1.8 para compilar!
+
+Lo que hace por ahora es agarrar un .xml transformar toda la informacion a clases y luego estas clases representarlas en imagenes.
+EL programa guarda una imagen del mismo nombre que el archivo .xml en la misma ubicacion pero en formato .png.
+El programa tira errores por consola, hay otro archivo que dice que son

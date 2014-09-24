@@ -175,5 +175,99 @@ public  class XMLCompiler {
 		
 		return Connections;
 	}
+	
+	public List<Class> getClasses(File file)
+	{
+		List<Class> Classes = new ArrayList<Class>();
+		Document doc;
+		NodeList nodes;
+		try{
+		  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		  DocumentBuilder db = dbf.newDocumentBuilder();
+		  doc = db.parse(file);
+		  doc.getDocumentElement().normalize();
+		  
+		  nodes = doc.getElementsByTagName("class");
+		  
+		  for(int i = 0; i<nodes.getLength();i++)
+		  {
+			 
+			  String id;
+			  String name;
+			  
+			  Element node = (Element)nodes.item(i);
+			  
+			  
+			  
+			  id = node.getAttribute("id");
+			  
+			  name = node.getAttribute("name");
+			  
+			  Class c = new Class(id,name);
+			  
+			  NodeList atts = node.getElementsByTagName("att");
+			  
+			  for(int j = 0; j<atts.getLength();j++)
+			  {
+				  
+				  
+				  Element node2 = (Element)atts.item(j);
+				  		  
+				  
+				  
+				  name = node2.getAttribute("name");
+				  String vis = node2.getAttribute("visibility");
+				     
+				  
+				  Attributes a = new Attributes(id,name,vis);
+				  
+				  c.addAtt(a);
+			  }
+			  
+			  NodeList mets = node.getElementsByTagName("method");
+			  
+			  
+			  for(int j = 0; j<mets.getLength();j++)
+			  {
+				  
+				  Element node2 = (Element)mets.item(j);
+				  name = node2.getAttribute("name");
+				  String type= node2.getAttribute("type");
+				  
+				  Method m = new Method(name , type);
+				  
+				  NodeList params = node2.getElementsByTagName("param");
+				  
+				  for(int k =0;k<params.getLength();k++)
+				  {
+					  Element node3 = (Element) params.item(k);
+					  
+					  name = node3.getAttribute("name");
+					  type= node3.getAttribute("type");
+					  
+					  Param p = new Param(name,type);
+					  
+					  m.addParam(p);
+							  
+					  
+				  }
+				  c.addMeth(m);
+				  
+				  
+			  }
+			  Classes.add(c);
+			  
+		  }
+		  
+		  
+		  }catch(Exception e)
+		{
+			  
+			  System.out.println(e.toString());
+			  return null;
+		}
+		
+		return Classes;
+	}
 
 }
